@@ -1226,6 +1226,9 @@ class Trainer:
                     break
 
         for epoch in range(epochs_trained, num_train_epochs):
+            if args.dataloader_regenerate_every_epochs > 0:
+                if epoch % args.dataloader_regenerate_every_epochs == 0:
+                    train_dataloader = self.get_train_dataloader()
             if isinstance(train_dataloader, DataLoader) and isinstance(train_dataloader.sampler, DistributedSampler):
                 train_dataloader.sampler.set_epoch(epoch)
             elif isinstance(train_dataloader.dataset, IterableDatasetShard):

@@ -220,6 +220,8 @@ class TrainingArguments:
         dataloader_num_workers (:obj:`int`, `optional`, defaults to 0):
             Number of subprocesses to use for data loading (PyTorch only). 0 means that the data will be loaded in the
             main process.
+        dataloader_regenerate_every_epochs (:obj:`int`, `optional`, defaults to 0):
+            Number of epochs after which dataloaders get reloaded. Useful if you change your dataset.
         past_index (:obj:`int`, `optional`, defaults to -1):
             Some models like :doc:`TransformerXL <../model_doc/transformerxl>` or :doc:`XLNet <../model_doc/xlnet>` can
             make use of the past hidden states for their predictions. If this argument is set to a positive int, the
@@ -520,6 +522,13 @@ class TrainingArguments:
         default=0,
         metadata={
             "help": "Number of subprocesses to use for data loading (PyTorch only). 0 means that the data will be loaded in the main process."
+        },
+    )
+
+    dataloader_regenerate_every_epochs: int = field(
+        default=0,
+        metadata={
+            "help": "Number of epochs after which dataloaders get reloaded. Useful if you change your dataset."
         },
     )
 
